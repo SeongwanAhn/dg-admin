@@ -1,5 +1,5 @@
 import 'babel-polyfill' // <== 추가
-import Vue from 'vue'
+import Vue from 'vue' //
 
 import Cookies from 'js-cookie'
 
