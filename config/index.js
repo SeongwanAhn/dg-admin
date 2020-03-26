@@ -9,7 +9,17 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/healthCheck': {
+        target: 'http://localhost:8080'
+      },
+      '/anonymous': {
+        target: 'http://localhost:8080'
+      }, 
+      '/api/v1': {
+        target: 'http://localhost:8080'
+      }
+    },
 
     // Various Dev Server settings
 
