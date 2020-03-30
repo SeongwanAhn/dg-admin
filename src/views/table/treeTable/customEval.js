@@ -16,24 +16,24 @@ export default function treeToArray(data, expandAll, parent, level, item) {
       _level = level + 1
     }
     Vue.set(record, '_level', _level)
-    // 如果有父元素
+    // 부모 요소가있는 경우
     if (parent) {
       Vue.set(record, 'parent', parent)
-      // 如果父元素有偏移量，需要计算在this的偏移量中
-      // 偏移量还与前面同级元素有关，需要加上前面所有元素的长度和
+      // 부모 요소에 오프셋이 있으면이 오프셋에서 계산해야합니다.
+      // 오프셋은 이전 형제 요소, 길이 및
       if (!marLTemp[_level]) {
         marLTemp[_level] = 0
       }
       Vue.set(record, '_marginLeft', marLTemp[_level] + parent._marginLeft)
       Vue.set(record, '_width', record[item] / parent[item] * parent._width)
-      // 在本次计算过偏移量后加上自己长度，以供下一个元素使用
+      // 이번에는 다음 요소에 대한 오프셋을 계산 한 후 자신의 길이를 추가하십시오.
       marLTemp[_level] += record._width
     } else {
-      // 如果为根
-      // 初始化偏移量存储map
+      // 루트면
+      // 오프셋 스토리지 맵 초기화
       marLTemp[record.id] = []
-      // map中是一个数组，存储的是每级的长度和
-      // 初始情况下为0
+      // map은 길이를 저장하는 배열이며
+      // 처음에는 0
       marLTemp[record.id][_level] = 0
       Vue.set(record, '_marginLeft', 0)
       Vue.set(record, '_width', 1)

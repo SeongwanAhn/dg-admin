@@ -7,3 +7,12 @@ export function fetchMenus(query) {
     params: query
   })
 }
+
+export function saveMenu(menu) {
+  return request({
+    url: '/api/v1/menus',
+    method: 'post',
+    data: menu
+  })
+}
+

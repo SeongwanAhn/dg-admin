@@ -52,7 +52,7 @@ export default {
     }
   },
   computed: {
-    // 格式化数据源
+    // 데이터 소스 포맷
     formatData: function() {
       let tmp
       if (!Array.isArray(this.data)) {
@@ -71,12 +71,12 @@ export default {
       row.row._show = show
       return show ? 'animation:treeTableShow 1s;-webkit-animation:treeTableShow 1s;' : 'display:none;'
     },
-    // 切换下级是否展开
+    // 하위의 확장 여부를 전환
     toggleExpanded: function(trIndex) {
       const record = this.formatData[trIndex]
       record._expanded = !record._expanded
     },
-    // 图标显示
+    // 아이콘 표시
     iconShow(index, record) {
       return (index === 0 && record.children && record.children.length > 0)
     }

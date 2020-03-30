@@ -82,7 +82,7 @@ export const constantRouterMap = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/menu/index'),
         name: 'Menu',
         meta: { title: 'menu', icon: 'dashboard', noCache: true }
       }
