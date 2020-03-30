@@ -27,6 +27,7 @@ router.beforeEach((to, from, next) => {
       if (store.getters.roles.length === 0) { // 현재 사용자가 user_info 정보 가져 오기를 완료했는지 확인
         store.dispatch('GetUserInfo').then(res => { // user_info 풀
           const roles = res.data.roles // note: roles must be a array! such as: ['editor','develop']
+          store.dispatch('fetchMenus')
           store.dispatch('GenerateRoutes', { roles }).then(() => { // 역할 권한을 기반으로 액세스 가능한 라우팅 테이블 생성
             router.addRoutes(store.getters.addRouters) // 액세스 가능한 라우팅 테이블을 동적으로 추가
             next({ ...to, replace: true }) // addRoutes가 완료되었는지 확인하기 위해 해킹 방법, replace : true를 설정하여 탐색이 히스토리 레코드를 남기지 않도록하십시오

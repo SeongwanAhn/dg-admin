@@ -44,7 +44,7 @@ const user = {
   },
 
   actions: {
-    // 用户名登录
+    // 아이디 로그인
     LoginByUsername({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
@@ -59,16 +59,16 @@ const user = {
       })
     },
 
-    // 获取用户信息
+    // 사용자 정보 얻기
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(response => {
-          if (!response.data) { // 由于mockjs 不支持自定义状态码只能这样hack
+          if (!response.data) { // mockjs는 사용자 정의 상태 코드를 지원하지 않으므로 다음과 같이 해킹 할 수 있습니다
             reject('error')
           }
           const data = response.data
 
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+          if (data.roles && data.roles.length > 0) { // 반환 된 역할이 비어 있지 않은 배열인지 확인
             commit('SET_ROLES', data.roles)
           } else {
             reject('getInfo: roles must be a non-null array !')
@@ -84,7 +84,7 @@ const user = {
       })
     },
 
-    // 第三方验证登录
+    // 타사 인증 로그인
     // LoginByThirdparty({ commit, state }, code) {
     //   return new Promise((resolve, reject) => {
     //     commit('SET_CODE', code)
@@ -98,7 +98,7 @@ const user = {
     //   })
     // },
 
-    // 登出
+    // 로그 아웃
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
@@ -112,7 +112,7 @@ const user = {
       })
     },
 
-    // 前端 登出
+    // 로그 아웃
     FedLogOut({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
@@ -121,7 +121,7 @@ const user = {
       })
     },
 
-    // 动态修改权限
+    // 동적으로 권한 수정
     ChangeRoles({ commit, dispatch }, role) {
       return new Promise(resolve => {
         commit('SET_TOKEN', role)
@@ -132,7 +132,7 @@ const user = {
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           commit('SET_INTRODUCTION', data.introduction)
-          dispatch('GenerateRoutes', data) // 动态修改权限后 重绘侧边菜单
+          dispatch('GenerateRoutes', data) // 권한을 동적으로 변경 한 후 사이드 메뉴를 다시 그립니다
           resolve()
         })
       })
